@@ -8,7 +8,7 @@
  * Author:
  *                Adriano Petrucci (http://esheep.petrucci.ch)
  * 
- * Version:       0.3
+ * Version:       0.4
  * 
  * Introduction:
  *                As "wrapper" for the OpenSource C# project
@@ -40,8 +40,10 @@
  *                  - still beta versions...
  */
 
-var DesktopPetVersion = '0.3';
-  
+var DesktopPetVersion = '0.4.1';
+
+
+
 function DesktopPet()
 {
   var _esheep = this;
@@ -78,39 +80,40 @@ function DesktopPet()
                 || document.documentElement.clientHeight
                 || document.body.clientHeight;
   
-  this.parseXML = function(text)
+  this.parseXML = async function(text)
   {
     this.xmlDoc = this.parser.parseFromString(text,'text/xml');
     var image = this.xmlDoc.getElementsByTagName('image')[0]; 
     this.tilesX = image.getElementsByTagName("tilesx")[0].textContent;
     this.tilesY = image.getElementsByTagName("tilesy")[0].textContent;
+    this.sprite.src = 'data:image/png;base64,data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==';
     this.sprite.src = 'data:image/png;base64,' + image.getElementsByTagName("png")[0].textContent;
     this.DOMimg.setAttribute("src", this.sprite.src);
-    var attribute = 
-      "width:" + (this.sprite.width) + "px;" +
-      "height:" + (this.sprite.height) + "px;" +
-      "position:absolute;" + 
-      "top:0px;" + 
-      "left:0px;";
-    this.DOMimg.setAttribute("style", attribute);
-    this.DOMimg.ondragstart = function() { return false; };
-    this.imageW = this.sprite.width / this.tilesX;
-    this.imageH = this.sprite.height / this.tilesY;
-    this.imageX = 0;
-    this.imageY = this.screenH - this.sprite.height / this.tilesY;
-    while(this.sprite.width == 0) ;
-    attribute = 
-      "width:" + (this.imageW) + "px;" +
-      "height:" + (this.imageH) + "px;" +
-      "position:fixed;" + 
-      "top:" + (this.imageY) + "px;" + 
-      "left:" + (this.imageX) + "px;" + 
-      "transform:rotatey(0deg);" +
-      "cursor:move;" +
-      "z-index:2000;" +
-      "overflow:hidden;"; 
-    this.DOMdiv.setAttribute("style", attribute);
-    this.DOMdiv.appendChild(this.DOMimg);
+		await new Promise(resolve => setTimeout(resolve, 1));
+		var attribute = 
+			"width:" + (this.sprite.width) + "px;" +
+			"height:" + (this.sprite.height) + "px;" +
+			"position:absolute;" + 
+			"top:0px;" + 
+			"left:0px;";
+		this.DOMimg.setAttribute("style", attribute);
+		this.DOMimg.ondragstart = function() { return false; };
+		this.imageW = this.sprite.width / this.tilesX;
+		this.imageH = this.sprite.height / this.tilesY;
+		this.imageX = 0;
+		this.imageY = this.screenH - this.sprite.height / this.tilesY;
+		attribute = 
+			"width:" + (this.imageW) + "px;" +
+			"height:" + (this.imageH) + "px;" +
+			"position:fixed;" + 
+			"top:" + (this.imageY) + "px;" + 
+			"left:" + (this.imageX) + "px;" + 
+			"transform:rotatey(0deg);" +
+			"cursor:move;" +
+			"z-index:2000;" +
+			"overflow:hidden;"; 
+		this.DOMdiv.setAttribute("style", attribute);
+		this.DOMdiv.appendChild(this.DOMimg);
     this.DOMdiv.onmousemove = function(e) {
       if(!_esheep.dragging && e.buttons==1 && e.button==0)
       {
@@ -229,7 +232,7 @@ function DesktopPet()
   
   this.start_esheep = function(animation)
   {
-    animation = typeof animation !== 'undefined' ? animation : "http://esheep.petrucci.ch/script/animation.xml";
+    animation = typeof animation !== 'undefined' ? animation : "http://esheep.petrucci.ch/script/animation.php";
   
     ajax = new XMLHttpRequest();
         

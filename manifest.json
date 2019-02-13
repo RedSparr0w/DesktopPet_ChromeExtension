@@ -11,8 +11,9 @@
   "name": "BrowserPet",
   "permissions": [
     "activeTab",
-    "http://esheep.petrucci.ch/"
+    "http://esheep.petrucci.ch/",
+    "https://esheep.redsparr0w.com/"
   ],
   "update_url": "https://clients2.google.com/service/update2/crx",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

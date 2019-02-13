@@ -208,7 +208,7 @@ function DesktopPet()
       "z-index:9999;" +
       "overflow:auto;background-color:lightblue;";
     this.DOMinfo.setAttribute("style",attribute);
-    this.DOMinfo.innerHTML = "<b>eSheep</b><sup style='float:right;'>ver: " + DesktopPetVersion + "</sup><br><hr>Visit the home page of this lovely sheep:<br><a href='http://esheep.petrucci.ch' target='_blank'>http://esheep.petrucci.ch</a>";
+    this.DOMinfo.innerHTML = "<b>eSheep</b><sup style='float:right;'>ver: " + DesktopPetVersion + "</sup><br><hr>Visit the home page of this lovely pet to get them on your desktop:<br><a href='http://esheep.petrucci.ch' target='_blank'>http://esheep.petrucci.ch</a>";
     document.body.appendChild(this.DOMinfo);
     document.body.appendChild(this.DOMdiv);
   };
@@ -232,7 +232,7 @@ function DesktopPet()
   
   this.start_esheep = function(animation)
   {
-    animation = typeof animation !== 'undefined' ? animation : "http://esheep.petrucci.ch/script/animation.php";
+    animation = typeof animation !== 'undefined' ? animation : "https://esheep.redsparr0w.com/5";
   
     ajax = new XMLHttpRequest();
         
